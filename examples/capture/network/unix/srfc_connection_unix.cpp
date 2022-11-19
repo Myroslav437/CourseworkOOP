@@ -2,7 +2,6 @@
 #if defined(unix) || defined(__unix__) || defined(__unix)
 
 #include "../includes/srfc_connection.hpp"
-#include "../includes/utilities/array_deleter.hpp"
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -10,6 +9,8 @@
 #include <thread>
 
 #include <stdexcept>
+
+#include "../includes/utilities/array_deleter.hpp"
 
 namespace net
 {

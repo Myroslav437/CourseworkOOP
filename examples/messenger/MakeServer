@@ -1,0 +1,50 @@
+# Compiler:
+CC=g++
+
+OUTFOLDER = bin/
+
+# Used standart libs:
+STANDART_LIBS = -lpthread -lstdc++fs
+
+# Compiler flags:
+CCFLAGS = -std=c++14 
+LDFLAGS = -fdiagnostics-color=always
+
+# Platform-dependent variables:
+ifeq ($(OS), Windows_NT)
+OTHER_LIBS = -lws2_32 -lwsock32 -lmswsock
+EXECUTABLE = server.exe
+else
+OTHER_LIBS = 
+EXECUTABLE = server.out
+endif
+
+# Source files:
+SOURCES= \
+	server.cpp \
+	network/srfc_request.cpp \
+	network/srfc_response.cpp \
+	network/srfc_connection.cpp \
+	network/srfc_listener.cpp \
+	network/unix/srfc_connection_unix.cpp \
+	network/unix/srfc_listener_unix.cpp \
+	network/win32/srfc_connection_win32.cpp \
+	network/win32/srfc_listener_win32.cpp
+
+OBJECTS=$(SOURCES:.cpp=.o)
+
+all: pre $(EXECUTABLE) clean
+
+# compile
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(foreach binObject, $(notdir $(foreach object, $(OBJECTS), $(object))), $(OUTFOLDER)$(binObject)) -o $(OUTFOLDER)$@ $(STANDART_LIBS) $(OTHER_LIBS)
+
+.cpp.o:
+	$(CC) $(CCFLAGS) -c $< -o $(OUTFOLDER)$(@F)
+
+pre:
+	rm -r -f $(OUTFOLDER) && mkdir $(OUTFOLDER)
+
+clean: 
+	mv $(OUTFOLDER)/$(EXECUTABLE) $(EXECUTABLE) 
+	rm -f $(foreach binObject, $(notdir $(foreach object, $(OBJECTS), $(object))), $(OUTFOLDER)$(binObject))

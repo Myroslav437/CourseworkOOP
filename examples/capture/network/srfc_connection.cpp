@@ -1,7 +1,7 @@
-#include "includes/srfc_connection.hpp"
-
 #include <algorithm>
 #include <stdexcept>
+
+#include "includes/srfc_connection.hpp"
 
 #include "includes/utilities/alg.hpp"
 #include "includes/utilities/net_utils.hpp"

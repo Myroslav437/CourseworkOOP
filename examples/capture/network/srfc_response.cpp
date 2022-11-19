@@ -1,9 +1,8 @@
-
-#include "includes/srfc_response.hpp"
-
 #include <cstring>
 #include <stdexcept>
 #include <vector>
+
+#include "includes/srfc_response.hpp"
 
 #include "includes/utilities/alg.hpp"
 #include "includes/utilities/array_deleter.hpp"

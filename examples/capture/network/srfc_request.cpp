@@ -1,9 +1,9 @@
-#include "includes/srfc_request.hpp"
-
-#include <stdexcept>
 #include <algorithm>
 #include <cstring>
 #include <vector>
+#include <stdexcept>
+
+#include "includes/srfc_request.hpp"
 
 #include "includes/utilities/array_deleter.hpp"
 #include "includes/utilities/alg.hpp"
